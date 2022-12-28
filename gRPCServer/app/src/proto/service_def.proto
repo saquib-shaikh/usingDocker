@@ -1,0 +1,41 @@
+syntax="proto3";
+
+message Empty{}
+
+message oneId{
+    string id=1;
+}
+
+message postData{
+    string name=1;
+    string price=2;
+    string category=3;
+}
+
+message Data{
+    string _id=1;
+    string name=2;
+    int32 price=3;
+    string category=4;
+    string creationTime=5;
+
+}
+message updateDat{
+    string id=1;
+    string name=2;
+    string price=3;
+    string category=4;
+
+}
+
+message datalist{
+    repeated Data data=1; 
+}
+
+service DataService{
+    rpc postData(postData) returns (Data){}
+    rpc getData(oneId) returns (Data){}
+    rpc updateData (updateDat) returns (Data){}
+    rpc deleteData(oneId) returns (Data){}
+    
+}

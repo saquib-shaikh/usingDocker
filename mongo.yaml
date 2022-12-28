@@ -1,0 +1,30 @@
+version: "3"
+services:
+  grpc-server: 
+    image: grpc-server:1.0
+    ports: 
+      - 3000:3000
+  express-server:
+    image: expre-server:1.0
+    ports:
+      - 4000:4000
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes: 
+      - mongo-data:/data/db
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+volumes: 
+  mongo-data:
